@@ -2,6 +2,8 @@ With reference from:
 https://github.com/TannerGilbert/Tensorflow-Object-Detection-API-Train-Model
 https://www.youtube.com/watch?v=cvyDYdI2nEI
 
+***This is a not-so-comprehensive guide on how to use train the TF2 model - I only planned it for my own reading purposes only, so I might have left out some non-important details. For the best results, I recommend that you follow the links above***
+
 REQUIREMENTS:
 PROTOC.EXE (TO UNPACK)
 TENSORFLOW 2 MODEL ZOO (https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_detection_zoo.md)

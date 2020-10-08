@@ -2,8 +2,6 @@ With reference from:
 https://github.com/TannerGilbert/Tensorflow-Object-Detection-API-Train-Model
 https://www.youtube.com/watch?v=cvyDYdI2nEI
 
-***This is a not-so-comprehensive guide on how to use train the TF2 model - I only planned it for my own reading purposes only, so I might have left out some non-important details. For the best results, I recommend that you follow the links above***
-
 REQUIREMENTS:
 PROTOC.EXE (TO UNPACK)
 TENSORFLOW 2 MODEL ZOO (https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_detection_zoo.md)
@@ -48,9 +46,14 @@ python generate_tfrecord.py -x object_detection\\images\test -l object_detection
 
 7. Begin training
 
-python model_main_tf2.py --model_dir=object_detection/faster_rcnn_resnet101_v1_640x640_coco17_tpu-8 --pipeline_config_path=object_detection/training/pipeline_fasterrcnn.config --alsologtostderr --alsologtostderr
+python model_main_tf2.py --model_dir=object_detection/faster_rcnn_resnet101_v1_640x640_coco17_tpu-8 --pipeline_config_path=object_detection/training/pipeline_fasterrcnn.config --alsologtostderr
 python model_main_tf2.py --model_dir=object_detection/efficientdet_d1_coco17_tpu-32 --pipeline_config_path=object_detection/training/pipeline_efficientdet.config --alsologtostderr
 ** Sometimes may get PermissionError - make sure the folder's "Read Only" box is unchecked!
+
+IMPORTANT POINTS TO NOTE:
+1) generate_tfrecord.py exists in TensorFlow1 and TensorFlow2 - IT IS IMPORTANT THAT YOU USE THE "CORRECT" VERSION OF generate_tfrecord.py THAT IS MEANT FOR THE TENSORFLOW VERSION THAT YOU HAVE! 
+"generate_tfrecord.py" for TF1 will still generate the .record files, but it will not be recognized by TF2. 
+2) Choose the MOST appropriate model from the TF2 Model Zoo - it is perfectly acceptable to try other models if one of them isn't working (for some reason I was unable to load the ssd .config file, but it works fine for faster_rcnn).
 
 8. Export Inference Graph (for some reason, my checkpoint is saved in a folder that is automatically named "=". Thus, my trained_checkpoint_dir is actually "=\", but the folder can be re-named after training has stopped)
 
@@ -59,3 +62,5 @@ python exporter_main_v2.py --input_type image_tensor --pipeline_config_path=obje
 *This will generate a "saved_model" folder in the object_detection/training/ directory, which will be used to evaluate the model
 
 9. Detect with object_detection_tutorial.ipynb - change the PATHS respectively
+
+*** Remember to change the paths in the .ipynb every time it changes folder!
